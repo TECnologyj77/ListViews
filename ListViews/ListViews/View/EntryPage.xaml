@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ListViews.EntryPage">
+    <ContentPage.Content>
+        <StackLayout Padding="20" VerticalOptions="Start">
+            <StackLayout Orientation="Horizontal">
+                <Entry x:Name="FirstNameEntry" Placeholder="First Name" Text="{Binding FirstName}"/>
+                <Entry x:Name="LastNameEntry" Placeholder="Last Name" Text="{Binding LastName}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Entry x:Name="PhoneNumberEntry" Placeholder="Phone number" Text="{Binding PhoneNumber}"/>
+                <Entry x:Name="AgeEntry" Placeholder="Age" Text="{Binding Age}"/>
+            </StackLayout>
+            <Button Text="Add" Clicked="AddEntry"/>
+            <Button Text="Got to List" Clicked="GoToList"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ListViews"
+             xmlns:converters="clr-namespace:ListViews.Converter"
+             xmlns:behaviors="clr-namespace:ListViews.Behaviors"
+             x:Class="ListViews.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:DoubleToIntConverter x:Key="doubleToIntConverter"/>
+            <converters:SelectedItemEvenArgsToSelectedItemConverter x:Key="SelectedItemConverter"/>
+
+            <!--<Style x:Key="BigRedLabel" TargetType="Label"> Key acts as 'name' for style to be called by, in this instance, a label as a StaticResource for the Style attribute 
+                                                                AKA an EXPLICIT STYLE
+            <Style TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center"/>  IMPLICIT STYLE 
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="TextColor" Value="Red"/> 
+            </Style>-->
+            <!--<Style x:Key="BigBlueLabel" TargetType="Label"> EXPLICIT STYLE
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="TextColor" Value="Blue"/>
+            </Style>-->
+            <Style x:Key="LittleGreenLabel" TargetType="Label">
+                <!--EXPLICIT STYLE-->
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="TextColor" Value="Lime"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Padding="20">
+        <ListView ItemsSource="{Binding People}" HasUnevenRows="True">
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior EventName="ItemSelected" Command="{Binding ItemSelectedCommand}" Converter="{StaticResource SelectedItemConverter}"/>
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ContentView>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Padding="20">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label  Text="{Binding FirstName}" FontSize="20" FontAttributes="Bold"/>
+                                        <Label  Text="{Binding LastName}" FontSize="20" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <Label Style="{StaticResource LittleGreenLabel}" Text="{Binding Age, Converter={StaticResource doubleToIntConverter}}" FontSize="15" />
+                                    <Entry Placeholder="Put text here"/>
+                                </StackLayout>
+                                <StackLayout>
+                                    <Label Style="{StaticResource LittleGreenLabel}" Text="{Binding PhoneNumber}" FontSize="15" />
+                                    <Button Text="Back to Entry" Clicked="ToEntry"/>
+                                        <Button Text="Store" Clicked="OnStore"/>
+                                    <Button Text="Restore" Clicked="OnRestore"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </ContentView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+
+</ContentPage>
